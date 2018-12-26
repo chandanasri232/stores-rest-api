@@ -21,10 +21,8 @@ class Store(Resource):
         data = Store.parser.parse_args() 
         store = StoreModel(name, data)
         
-        try:
-            store.save_to_db()
-        except:
-            return {"message": "An error occurred creating the store."}, 500
+        store.save_to_db()
+       
 
         return store.json(), 201
 
