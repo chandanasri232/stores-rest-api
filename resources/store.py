@@ -18,10 +18,8 @@ class Store(Resource):
         if StoreModel.find_by_name(name):
             return {'message': "A store with name '{}' already exists.".format(name)}, 400
         
-        data = Store.parser.parse_args()
-        item = StoreModel(name, data)
-        
-        store = StoreModel(name)
+        data = Store.parser.parse_args() 
+        store = StoreModel(name, data)
         
         try:
             store.save_to_db()
