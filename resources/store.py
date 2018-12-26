@@ -3,11 +3,10 @@ from models.store import StoreModel
 
 class Store(Resource):
     parser = reqparse.RequestParser()
-      parser.add_argument('id',
+    parser.add_argument('id',
         type=int,
         required=True,
-        help="Every store needs a store id."
-    )
+        help="Every store needs a store id.")
     
     def get(self, name):
         store = StoreModel.find_by_name(name)
