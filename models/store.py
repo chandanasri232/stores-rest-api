@@ -8,8 +8,9 @@ class StoreModel(db.Model):
 
     items = db.relationship('ItemModel', lazy='dynamic')
 
-    def __init__(self, name):
+    def __init__(self, name,id):
         self.name = name
+        self.id = id
 
     def json(self):
         return {'name': self.name, 'id' : self.id, 'items': [item.json() for item in self.items.all()]}
