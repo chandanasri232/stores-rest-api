@@ -3,15 +3,10 @@ from models.store import StoreModel
 
 class Store(Resource):
     parser = reqparse.RequestParser()
-    parser.add_argument('price',
-        type=float,
-        required=True,
-        help="This field cannot be left blank!"
-    )
-    parser.add_argument('store_id',
+      parser.add_argument('id',
         type=int,
         required=True,
-        help="Every item needs a store id."
+        help="Every store needs a store id."
     )
     
     def get(self, name):
@@ -23,8 +18,12 @@ class Store(Resource):
     def post(self, name):
         if StoreModel.find_by_name(name):
             return {'message': "A store with name '{}' already exists.".format(name)}, 400
-
+        
+        data = Item.parser.parse_args()
+        item = ItemModel(name, data)
+        
         store = StoreModel(name)
+        
         try:
             store.save_to_db()
         except:
