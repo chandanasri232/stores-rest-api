@@ -18,8 +18,8 @@ class Store(Resource):
         if StoreModel.find_by_name(name):
             return {'message': "A store with name '{}' already exists.".format(name)}, 400
         
-        data = Item.parser.parse_args()
-        item = ItemModel(name, data)
+        data = Store.parser.parse_args()
+        item = StoreModel(name, data)
         
         store = StoreModel(name)
         
